@@ -1,6 +1,6 @@
 n = 5
 x = [1.0, 1.3, 1.6, 1.9, 2.2]
-y=[[0]*n for _ in range(n)]
+y=[[0 for i in range(n)]for j in range(n)]
 
 y[0][0] = 0.7651977
 y[1][0] = 0.6200860

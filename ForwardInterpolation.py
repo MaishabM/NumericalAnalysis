@@ -16,7 +16,7 @@ value = float(input('Enter the interpolation point: '))
 
 y[0][0] = 46
 y[1][0] = 66
-y[2][0] = 81
+y[2][0] = 86
 y[3][0] = 93
 y[4][0] = 101
 

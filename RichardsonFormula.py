@@ -1,35 +1,34 @@
 import math
 
 
-def D(Func, a, h):
-    '''Centered finite difference method to calculate the derivative at x=a'''
-    return (Func(a + h) - Func(a - h)) / (2 * h)
+# Centered finite difference approximation
+def central_difference(f, x, h):
+    return (f(x + h) - f(x - h)) / (2 * h)
 
 
-def Richardson_dif(func, a, max_order=10):
-    '''Richardson extrapolation for numerical derivative.
-       It computes higher order derivatives using the basic central difference method.
-    '''
-    # Initialize an array for approximations
-    N = [[0 for _ in range(max_order)] for _ in range(max_order)]
+# Richardson Extrapolation for first derivative
+def richardson_derivative(f, x, n=10):
+    N = [[0.0 for i in range(n)] for j in range(n)]
 
-    # Calculate initial approximations for different step sizes
-    for I in range(max_order):
-        N[I][0] = D(func, a, 1 / (2 ** (I + 1)))
+    # Fill first column with approximations using smaller and smaller h
+    for i in range(n):
+        h = 1 / (2 ** (i + 1))
+        N[i][0] = central_difference(f, x, h)
 
-    # Richardson extrapolation for higher orders
-    for k in range(1, max_order):
-        for i in range(max_order - k):
-            N[i][k] = ((2 ** (k)) * N[i + 1][k - 1] - N[i][k - 1]) / (2 ** (k) - 1)
+    # Richardson extrapolation to refine estimates
+    for k in range(1, n):
+        for i in range(n - k):
+            N[i][k] = (2 ** k * N[i + 1][k - 1] - N[i][k - 1]) / (2 ** k - 1)
 
-    return N[0][max_order - 1]
+    return N[0][n - 1]
 
 
-# Example usage: First derivative of ln(x) at x = 1.8
+# Example: derivative of ln(x) at x = 1.8
 f = lambda x: math.log(x)
-result = Richardson_dif(f, 1.8)
-print(f"First derivative of ln(x) at x = 1.8 is approximately: {result:.15f}")
-print(f"The exact value of ln(x) at x = 1.8 is: {math.log(1.8):.15f}")
+x0 = 1.8
 
-# Example usage: Higher-order derivatives (e.g., 2nd derivative) can be approximated similarly
-# Just change the `max_order` and adjust the function accordingly.
+approx = richardson_derivative(f, x0)
+exact = 1 / x0
+
+print(f"Approximate derivative at x = {x0}: {approx:.15f}")
+print(f"Exact derivative (1/x) at x = {x0}: {exact:.15f}")
