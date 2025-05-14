@@ -1,14 +1,19 @@
 import math
+def f(x):
+    return math.sin(x)
 
-def trapezoidal(f, a, b, n):
+def trapezoidal(a, b, n):
     h = (b - a) / n
-    total = (f(a) + f(b)) / 2
+    total = (f(a) + f(b))
+
     for i in range(1, n):
         x = a + i * h
-        total += f(x)
-    return h * total
+        total += f(x) * 2
 
-# Example: ∫₀^{π/2} sin(x) dx
-f = lambda x: math.sin(x)
-result = trapezoidal(f, 0, math.pi/2, 4)
-print(f"Approximate integral: {result:.10f}")
+    return (h / 2) * total
+
+a = 0
+b = math.pi / 2
+
+res = trapezoidal(a, b, 4)
+print(f'The result is: {res:.6f}')
