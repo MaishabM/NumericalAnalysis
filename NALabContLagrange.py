@@ -6,7 +6,7 @@ y = [0, 0.70711, 1.0]
 value = math.pi / 6
 
 total = 0.0
-for i in range(1,n):
+for i in range(n):
     l = y[i]
     for j in range(n):
         if i != j:
