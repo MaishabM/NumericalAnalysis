@@ -15,5 +15,5 @@ def trapezoidal(a, b, n):
 a = 0
 b = math.pi / 2
 
-res = trapezoidal(a, b, 4)
+res = trapezoidal(a, b, 5)
 print(f'The result is: {res:.6f}')

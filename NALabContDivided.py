@@ -1,11 +1,12 @@
-n = 4
-x = [0,1,2,3]
+n = 5
+x = [1.0,1.3,1.6,1.9,2.2]
 y = [[0 for i in range(n)]for j in range(n)]
 value = float(input('Enter the interpolation point: '))
-y[0][0] = -1
-y[1][0] = 1
-y[2][0] = 7
-y[3][0] = 25
+y[0][0] = 0.7651977
+y[1][0] = 0.6200860
+y[2][0] = 0.4554022
+y[3][0] = 0.2818186
+y[4][0] = 0.1103623
 
 for j in range(1,n):
     for i in range(n-j):

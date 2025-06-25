@@ -8,9 +8,9 @@ def iteration(p,TOL,NO):
     print('n      p       f(p)')
     while i<=NO:
         print(f'{i}  {p:.6f}   {f(p):.6f}')
-        p = f(p)
         if abs(f(p)-p) <= TOL:
             return p
+        p = f(p)
         i+=1
     print('The method failed')
     return None

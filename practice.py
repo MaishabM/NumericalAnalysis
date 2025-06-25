@@ -1,28 +1,20 @@
-n = 4
-x = [0,1,2,3]
-y = [[0 for i in range(n)]for j in range(n)]
-value = float(input('Enter the interpolation point: '))
-y[0][0] = -1
-y[1][0] = 1
-y[2][0] = 7
-y[3][0] = 25
+import math
+def f(x):
+    return math.sin(x)
 
-for j in range(1,n):
-    for i in range(n-j):
-        y[i][j] = (y[i+1][j-1] - y[i][j-1]) / (x[i+j]-x[i])
+def simpson(lower,upper,n):
+    h = (upper - lower)/n
+    total = f(lower) + f(upper)
 
-print('The divided difference table: ')
-for i in range(n):
-    print(f'{x[i]}',end='  ')
-    for j in range(n):
-        if j <= n-i-1:
-            print(f'{y[i][j]:.2f}',end='  ')
-    print()
+    for i in range(1,n):
+        x = lower + (i*h)
+        if i%2==0:
+            total += 2 * f(x)
+        else:
+            total += 4*f(x)
+    return total * (h/3)
 
-res = y[0][0]
-product = 1
-for i in range(1,n):
-    product *= (value - x[i-1])
-    res += product * y[0][i]
-
-print(f'The interpolated result at y({value}): {res:.6f}')
+l = float(input('Enter the lower limit: '))
+u = float(input('Enter the upper limit: '))
+res = simpson(l,u,5)
+print(f'The result: {res:.6f}')
