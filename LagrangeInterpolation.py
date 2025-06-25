@@ -1,7 +1,25 @@
-n = 4
-x = [1,3,5,7]
-y = [24,120,336,720]
+import math
+
+def f(x):
+    return math.log(x)
+
+n = 3
+h = 0.5
+x = [0 for _ in range(n)]
+y = [0 for _ in range(n)]
+
+for i in range(n):
+    x[i] = 2 + i*h
+    y[i] = f(x[i])
+
 value = float(input('Enter the value: '))
+
+print('x:')
+for i in range(n):
+    print(f'{x[i]}',end='  ')
+print('\ny:')
+for i in range(n):
+    print(f'{y[i]:.5f}',end='  ')
 
 total = 0.0
 
@@ -12,4 +30,4 @@ for i in range(n):
             res *=  (value - x[j]) / (x[i] - x[j])
     total += res
 
-print(f'The interpolation at {value} is: {total:.6f}')
+print(f'\nThe interpolation at {value} is: {total:.6f}')
